@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Text-to-Speech Service</title>
+  </head>
+  <body>
+    <h1>Text-to-Speech Service</h1>
+    <form>
+      <label for="text">Enter Text:</label>
+      <textarea id="text" rows="4" cols="50"></textarea><br><br>
+      <button id="speak-button">Speak</button>
+    </form>
+    <script>
+      const speakButton = document.querySelector("#speak-button");
+      const textInput = document.querySelector("#text");
+
+      speakButton.addEventListener("click", (event) => {
+        event.preventDefault();
+        const text = textInput.value;
+        const utterance = new SpeechSynthesisUtterance(text);
+
+        const voices = window.speechSynthesis.getVoices();
+        const voice = voices.find((voice) => voice.name === "Microsoft Heami - Korean");
+
+        utterance.voice = voice;
+        window.speechSynthesis.speak(utterance);
+      });
+    </script>
+  </body>
+</html>
